@@ -3,7 +3,12 @@ import { Button, Card, Text } from "react-native-paper";
 import { CardComponentI } from "./types";
 import { StyleSheet, View } from "react-native";
 
-const CardComponent = ({ title, content }: CardComponentI) => {
+const CardComponent = ({
+  title,
+  content,
+  index,
+  removeCard,
+}: CardComponentI) => {
   return (
     <View style={styles.cardContainer}>
       <Card>
@@ -12,7 +17,7 @@ const CardComponent = ({ title, content }: CardComponentI) => {
           <Text variant="bodyMedium">{content}</Text>
         </Card.Content>
         <Card.Actions>
-          <Button>Cancel</Button>
+          <Button onPress={() => removeCard(index)}>Cancel</Button>
           <Button>Ok</Button>
         </Card.Actions>
       </Card>
@@ -23,8 +28,9 @@ const CardComponent = ({ title, content }: CardComponentI) => {
 const styles = StyleSheet.create({
   cardContainer: {
     paddingTop: 15,
-    paddingLeft:15,
-    paddingRight: 15
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingBottom: 10
   },
 });
 

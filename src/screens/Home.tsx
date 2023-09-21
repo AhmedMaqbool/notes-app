@@ -1,26 +1,31 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import { FAB } from "react-native-paper";
-import { View } from "react-native";
 import CardComponent from "../components/Card";
 import { CardI, useCardStore } from "../zustand/store";
 
 const Home = () => {
-  const cards = useCardStore<CardI[]>((state) => state.cards)
-  const addCard = useCardStore((state) => state.addCard)
+  const cards = useCardStore<CardI[]>((state) => state.cards);
+  const addCard = useCardStore((state) => state.addCard);
+  const removeCard = useCardStore((state) => state.removeCard);
+
   return (
     <>
-    <View>
-      {
-        cards.map((card: any,index: number) => (
-          <CardComponent key={index} title="title" content='content' />
-        ))
-      }
-    </View>
+      <ScrollView>
+        {cards.map((card: any, index: number) => (
+          <CardComponent
+            removeCard={removeCard}
+            key={index}
+            title="title"
+            content="content"
+            index={index}
+          />
+        ))}
+      </ScrollView>
       <FAB
         icon="plus"
         style={styles.fab}
-        onPress={() => addCard({title: "title", content: "content"})}
+        onPress={() => addCard({ title: "title", content: "content" })}
         mode="elevated"
       />
     </>
