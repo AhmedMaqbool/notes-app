@@ -4,7 +4,7 @@ import { FAB } from "react-native-paper";
 import CardComponent from "../components/Card";
 import { CardI, useCardStore } from "../zustand/store";
 
-const Home = () => {
+const Home = ({ navigation }: any) => {
   const cards = useCardStore<CardI[]>((state) => state.cards);
   const addCard = useCardStore((state) => state.addCard);
   const removeCard = useCardStore((state) => state.removeCard);
@@ -25,7 +25,7 @@ const Home = () => {
       <FAB
         icon="plus"
         style={styles.fab}
-        onPress={() => addCard({ title: "title", content: "content" })}
+        onPress={() => navigation.navigate('Write-Note')}
         mode="elevated"
       />
     </>
